@@ -1,0 +1,9 @@
+begin
+
+Var1 := 5;
+--read(Var1);
+write(Var1);
+
+
+
+end
