@@ -35,7 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/leer_archivo_linea_comandos.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/scanner.o
 
@@ -63,11 +62,6 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/micro-compiler: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/micro-compiler ${OBJECTFILES} ${LDLIBSOPTIONS}
-
-${OBJECTDIR}/leer_archivo_linea_comandos.o: leer_archivo_linea_comandos.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/leer_archivo_linea_comandos.o leer_archivo_linea_comandos.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}

@@ -14,7 +14,10 @@ extern "C" {
 
 //DEFINE
 
-#define MAXIDLEN 100;
+#define MAXIDLEN 100
+    
+    
+typedef char string[MAXIDLEN];    
 
     
 typedef enum token_types {
@@ -22,8 +25,6 @@ typedef enum token_types {
     LPAREN, RPAREN, SEMICOLON, COMMA, ASSIGNOP,
     PLUSOP, MINUSOP, SCANEOF
 }token;
-
-typedef char string[MAXIDLEN];
 
 typedef struct operator 
 { /* for operators*/
@@ -44,11 +45,7 @@ typedef struct expression
     };
 }expr_rec;
 
-//VARIABLES
-
-extern char token_buffer[];
-token current_token;
-    
+  
 
 
 

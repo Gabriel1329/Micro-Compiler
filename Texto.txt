@@ -1,1 +1,9 @@
-p () 777  Texto.tx
+--Esto es una prueba de sintaxis
+
+
+begin
+--knigdgh
+var1 := 1000
+var1 + 100;
+
+end

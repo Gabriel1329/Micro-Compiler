@@ -10,7 +10,9 @@
 #ifndef SCANNER_H
 #define	SCANNER_H
 
-#include "estructuturas.h" 
+#include "variables.h" 
+#include <string.h>
+
 
 #ifdef	__cplusplus
 
@@ -19,6 +21,10 @@
 extern "C" {
 #endif
 
+extern void clear_buffer();
+extern void buffer_char(int c);
+extern token check_reserved();
+extern void lexical_error(int c);
 extern token scanner();
 
 

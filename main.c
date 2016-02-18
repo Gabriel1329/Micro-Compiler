@@ -3,18 +3,12 @@
  * Author: soto
  */
 
-#include <stdio.h>
-//#include <stdlib.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <stdbool.h>
-//#include <string.h>
 #include "scanner.h"
 
-
-
-
-
- /* 
+/* 
 void system_goal(void)
 {
    <system goal> ::= <program> SCANEOF 
@@ -364,10 +358,7 @@ token next_token()
 {
     return current_token;
 }
-extern void clear_buffer();
-extern void buffer_char(char pChar);
-extern void check_reserved();
-extern void lexical_error(char pChar);
+
 extern void match(token pToken);
 extern void syntax_error(token pToken);
 */
@@ -375,19 +366,33 @@ extern void syntax_error(token pToken);
 
 
 int main(int argc, char** argv) 
-{  
-//    stdin = fopen("Texto.txt", "r"); 
+{
+//Se pone el path de la siguiente manera    
+//home/soto/NetBeansProjects/Micro-Compiler/Texto.txt ó Texto.txt
+//se puede poner solo Texto.txt por que el archivo esta en la carpeta del proyecto
     
-/*
-    char str[999];
-    if (stdin) {
-        while (fscanf(stdin, "%s", str)!=EOF)
-            printf("%s",str);
-        fclose(stdin);
+    char direccionArchivo[150];
+    printf( "Bienvenido a Micro-Compiler, Ingrese la ruta del archivo: " );
+    scanf( "%s", direccionArchivo );
+  
+    
+    
+    archivoEntrada = freopen( direccionArchivo, "r", stdin );
+    
+    if (!archivoEntrada)
+    {
+        printf( "El archivo no existe" );
+        return EXIT_FAILURE;
     }
-*/
     
-    scanner();
-    return 0;
+    
+    while(current_token != SCANEOF)
+    {
+        current_token = scanner();
+    }
+    
+    fclose( archivoEntrada );
+    
+    return EXIT_SUCCESS;    
 }
 

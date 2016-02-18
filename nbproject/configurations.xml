@@ -6,15 +6,16 @@
                    projectFiles="true">
       <itemPath>estructuturas.h</itemPath>
       <itemPath>scanner.h</itemPath>
+      <itemPath>variables.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>Texto.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>leer_archivo_linea_comandos.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>scanner.c</itemPath>
     </logicalFolder>
@@ -40,15 +41,17 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="estructuturas.h" ex="false" tool="3" flavor2="0">
+      <item path="Texto.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="leer_archivo_linea_comandos.c" ex="false" tool="0" flavor2="0">
+      <item path="estructuturas.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="scanner.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="scanner.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="variables.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -71,15 +74,17 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="estructuturas.h" ex="false" tool="3" flavor2="0">
+      <item path="Texto.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="leer_archivo_linea_comandos.c" ex="false" tool="0" flavor2="0">
+      <item path="estructuturas.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="scanner.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="scanner.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="variables.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
