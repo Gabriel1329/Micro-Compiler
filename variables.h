@@ -10,6 +10,7 @@
 
 #include "estructuturas.h"
 #include <stdio.h>
+#include <stdbool.h>
 
 #ifdef	__cplusplus
 extern "C" {
@@ -22,6 +23,8 @@ token current_token;
 
 FILE *archivoEntrada;
 FILE *archivoSalida;
+
+bool matched; 
     
 
 

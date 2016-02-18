@@ -5,6 +5,8 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>estructuturas.h</itemPath>
+      <itemPath>funcionesUtiles.h</itemPath>
+      <itemPath>parser.h</itemPath>
       <itemPath>scanner.h</itemPath>
       <itemPath>variables.h</itemPath>
     </logicalFolder>
@@ -16,7 +18,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>funcionesUtiles.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>parcer.c</itemPath>
       <itemPath>scanner.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -45,7 +49,15 @@
       </item>
       <item path="estructuturas.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="funcionesUtiles.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="funcionesUtiles.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="parcer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="parser.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="scanner.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -78,7 +90,15 @@
       </item>
       <item path="estructuturas.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="funcionesUtiles.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="funcionesUtiles.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="parcer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="parser.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="scanner.c" ex="false" tool="0" flavor2="0">
       </item>

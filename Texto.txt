@@ -1,9 +1,10 @@
---Esto es una prueba de sintaxis
+--Comentario de prueba
+BEGIN
 
+write((a+12),(b+23));
 
-begin
---knigdgh
-var1 := 1000
-var1 + 100;
+read (a,b);
 
-end
+a := r+(100-2); 
+
+END

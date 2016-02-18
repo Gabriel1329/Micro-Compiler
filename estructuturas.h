@@ -14,6 +14,8 @@ extern "C" {
 
 //DEFINE
 
+    
+#define  DEBUG  true
 #define MAXIDLEN 100
     
     

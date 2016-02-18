@@ -6,190 +6,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdbool.h>
-#include "scanner.h"
+#include "parser.h"
 
-/* 
-void system_goal(void)
-{
-   <system goal> ::= <program> SCANEOF 
-    program();
-    match(SCANEOF);
-}
-*/
-
-/*
-void program(void)
-{
-     <program> ::= BEGIN <statement list> END
-    match(BEGIN);
-    statement_list();
-    match(END);
-}
-*/
-
-/*
-void statement_list(void)
-{
-    
-     *<statement list> ::= <statement>
-     *                     { <statement>}   
-     
-    
-    statement();
-    while (true){
-        switch (next_token()){
-            case ID:
-            case READ:
-            case WRITE:
-                statement();
-                break;
-            default:
-                return;
-        }
-    }
-}
-*/
-
-
-/*
-void statement(void)
-{
-    token tok = next_token();
-    
-    switch (tok) 
-    {
-        case ID:
- */
-            /* <statement> ::= ID := <expression> ;*/
-/*            match(ID); 
-            match(ASSIGNOP);
-            expression(); 
-            match(SEMICOLON);
-            break;
-            
-        case READ:
- */
-            /* <statement> ::= READ (<id list>);*/
-/*            match(READ);
-            match(LPAREN);
-            id_list();
-            match(RPAREN);
-            match(SEMICOLON);
-            break;
-        
-        case WRITE:
- */
-            /*<statement> ::= WRITE (<expr list>) ;*/
-/*            match(WRITE); 
-            match(LPAREN);
-            expr_list();
-            match(RPAREN);
-            match(SEMICOLON);
-            break;
-            
-        default:
-            syntax_error(tok);
-            break;
-            
-    }
-}
- */
- /*
-void id_list(void)
-{
-    <id list> ::= ID { , ID}
-    match(ID);
-    
-    while (next_token() == COMMA)
-    {
-        match(COMMA);
-        match(ID);
-    }
-}
-*/
-
-
-/*
-void expression (void)
-{
-    token t;
-    
-    
-     * <expression> ::= <primary> 
-     *                  { <add op> <primary>}
-     
-    primary();
-    for (t= next_token(); t==PLUSOP || t== MINUSOP ; t = next_token())
-    {
-        add_op();
-        primary();
-    } 
-}
-*/
-
-/*
-void expr_list(void)
-{
-     <expr list> ::= <expression> { , <expression>}
-    expression();
-    
-    while (next_token() == COMMA)
-    {
-        match(COMMA);
-//        expression(exp);
-    }
-}
-*/
-
-/*
-void add_op(void)
-{
-    token tok = next_token();
-     <addop> ::= PLUSOP | MINUSOP
-    if(tok == PLUSOP || tok == MINUSOP)
-        match(tok);
-    else
-        syntax_error(tok);
-}
-*/
-
-/*
-void primary(void)
-{
-    token tok = next_token();
-    
-    switch(tok)
-    {
-        case LPAREN:
- */
-            /* <primary> ::= (<expression>)*/
-/*           
-            match(LPAREN); 
-            expression();
-            match(RPAREN);
-            break;
-            
-        case ID:
- */
-            /* <primary> ::= ID*/
-/*            match(ID);
-            break;
-            
-        case INTLITERAL:
- */
-            /* <primary> ::= INTLITERAL*/
- /*           match(INTLITERAL);
-            break;
-            
-        default:
-            syntax_error(tok);
-            break;
-            
-            
-    }
-}
-
-*/
 
 
 /* Is s in the symbol table?
@@ -344,40 +162,20 @@ void expression (expr_rec *result)
 */
 
 
-/*EL CODIGO DE AQUI EN ADELANTE LO PUSE SOLO PARA QUE NO DE ERRORES, EN RESUMEN 
- * SOLO TENEMOS EL CODIGO DEL LIBRO DIGITADO
- -) Hay que implemnetar generate
- -) ver cual funcion expresion utilizar, xq hay una con parametro y otra sin parametro
- -) Cree la variable current_token 
- -) TUVE QUE PONERLE VALOR A MAXIDLEN PARA QUE NO DIERA ERROR
- */ 
-//extern token next_token();
-
-/*
-token next_token()
-{
-    return current_token;
-}
-
-extern void match(token pToken);
-extern void syntax_error(token pToken);
-*/
-
-
-
 int main(int argc, char** argv) 
 {
 //Se pone el path de la siguiente manera    
 //home/soto/NetBeansProjects/Micro-Compiler/Texto.txt ó Texto.txt
 //se puede poner solo Texto.txt por que el archivo esta en la carpeta del proyecto
     
-    char direccionArchivo[150];
-    printf( "Bienvenido a Micro-Compiler, Ingrese la ruta del archivo: " );
-    scanf( "%s", direccionArchivo );
+    //char direccionArchivo[150];
+    //printf( "Bienvenido a Micro-Compiler, Ingrese la ruta del archivo: " );
+    //scanf( "%s", direccionArchivo );
   
     
     
-    archivoEntrada = freopen( direccionArchivo, "r", stdin );
+    //archivoEntrada = freopen( direccionArchivo, "r", stdin );
+    archivoEntrada = freopen( "Texto.txt", "r", stdin );
     
     if (!archivoEntrada)
     {
@@ -385,12 +183,9 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
     
+    system_goal();
     
-    while(current_token != SCANEOF)
-    {
-        current_token = scanner();
-    }
-    
+ 
     fclose( archivoEntrada );
     
     return EXIT_SUCCESS;    

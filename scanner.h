@@ -11,6 +11,7 @@
 #define	SCANNER_H
 
 #include "variables.h" 
+#include "funcionesUtiles.h"
 #include <string.h>
 
 
@@ -21,11 +22,12 @@
 extern "C" {
 #endif
 
-extern void clear_buffer();
+extern void clear_buffer(void);
 extern void buffer_char(int c);
-extern token check_reserved();
+extern token check_reserved(void);
 extern void lexical_error(int c);
-extern token scanner();
+extern token scanner(void);
+extern token next_token(void);
 
 
 
