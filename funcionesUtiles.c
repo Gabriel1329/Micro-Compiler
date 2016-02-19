@@ -3,7 +3,7 @@
 
 
 
-int prueba(char* buffer, char* token, int pLargo)
+int comparacionCadenas(char* buffer, char* token, int pLargo)
 {
     int resultado = 0;
     int i = 0;

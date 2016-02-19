@@ -95,22 +95,22 @@ token check_reserved(void)
     //sprintf(temp, "%s", temp);
     // metodo que sirve con el print strcmpInsensitive(temp, read)
     //prueba(char* buffer, char* token, int pLargo)
-    if(prueba(temp, read, 4) == 0) 
+    if(comparacionCadenas(temp, read, 4) == 0) 
     {
         printf("%s","READ\n");
         return READ;   
     }   
-    else if(prueba(temp, write, 5) == 0) 
+    else if(comparacionCadenas(temp, write, 5) == 0) 
     {   
         printf("%s","WRITE\n");
         return WRITE;   
     }   
-    else if(prueba(temp, begin, 5) == 0) 
+    else if(comparacionCadenas(temp, begin, 5) == 0) 
     {   
         printf("%s","BEGIN\n");
         return BEGIN;   
     }   
-    else if(prueba(temp, end, 3) == 0) 
+    else if(comparacionCadenas(temp, end, 3) == 0) 
     {   
         printf("%s","END\n");
         return END;   

@@ -30,6 +30,7 @@ extern void read_id(expr_rec in_var);
 extern expr_rec process_id(void);
 extern expr_rec process_literal(void);
 extern void writer_expr(expr_rec out_expr);
+extern void   generate(char * op, char * A, char * B, char * C);
 
 
 

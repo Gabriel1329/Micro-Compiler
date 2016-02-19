@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-extern int prueba(char* buffer, char* token, int pLargo);
+extern int comparacionCadenas(char* buffer, char* token, int pLargo);
 
 
 #ifdef	__cplusplus
