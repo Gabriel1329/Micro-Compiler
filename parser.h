@@ -21,6 +21,7 @@ extern void statement_list(void);
 extern void statement(void);
 extern void id_list(void);
 extern void expression (void);
+//extern void expression (expr_rec *result);
 extern void expr_list(void);
 extern void add_op(void);
 extern void primary(void);

@@ -38,7 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/funcionesUtiles.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/parcer.o \
-	${OBJECTDIR}/scanner.o
+	${OBJECTDIR}/scanner.o \
+	${OBJECTDIR}/traductor.o
 
 
 # C Compiler Flags
@@ -84,6 +85,11 @@ ${OBJECTDIR}/scanner.o: scanner.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/scanner.o scanner.c
+
+${OBJECTDIR}/traductor.o: traductor.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/traductor.o traductor.c
 
 # Subprojects
 .build-subprojects:

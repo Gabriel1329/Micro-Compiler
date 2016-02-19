@@ -90,26 +90,27 @@ token check_reserved(void)
     char * temp     =  token_buffer;
     
     
-    printf("%s <---> ",temp);
+    //printf("%s <---> ",temp);
     //printf(" <-----> ");
     //sprintf(temp, "%s", temp);
-    
-    if(strcmpInsensitive(temp, read) == 0) 
+    // metodo que sirve con el print strcmpInsensitive(temp, read)
+    //prueba(char* buffer, char* token, int pLargo)
+    if(prueba(temp, read, 4) == 0) 
     {
         printf("%s","READ\n");
         return READ;   
     }   
-    else if(strcmpInsensitive(temp, write) == 0) 
+    else if(prueba(temp, write, 5) == 0) 
     {   
         printf("%s","WRITE\n");
         return WRITE;   
     }   
-    else if(strcmpInsensitive(temp, begin) == 0) 
+    else if(prueba(temp, begin, 5) == 0) 
     {   
         printf("%s","BEGIN\n");
         return BEGIN;   
     }   
-    else if(strcmpInsensitive(temp, end) == 0) 
+    else if(prueba(temp, end, 3) == 0) 
     {   
         printf("%s","END\n");
         return END;   
@@ -120,7 +121,7 @@ token check_reserved(void)
 
 void lexical_error(int c) 
 {   
-    fprintf(stderr, "El lexico en  %c \n", c);   
+    fprintf(stderr, "Error lexico en  %c \n", c);   
     exit(1);   
 } 
 
@@ -157,37 +158,31 @@ token scanner(void)
                 buffer_char(c);   
             }   
             ungetc(c, stdin);
-            printf("%s <---> ",token_buffer);
             printf("%s","INTLITERAL\n");
             return INTLITERAL;   
         }   
         else if( in_char == '(' ) 
         {   
-            printf("%s <---> ","(");
             printf("%s","LPAREN\n");
             return LPAREN;   
         }   
         else if( in_char == ')' ) 
         {   
-            printf("%s <---> ",")");
             printf("%s","RPAREN\n");
             return RPAREN;   
         }   
         else if( in_char == ';' ) 
         {
-            printf("%s <---> ",";");
             printf("%s","SEMICOLON\n");
             return SEMICOLON;   
         }   
         else if( in_char == ',' ) 
         {
-            printf("%s <---> ",",");
             printf("%s","COMMA\n");
             return COMMA;   
         }   
         else if( in_char == '+' ) 
         {
-            printf("%s <---> ","+");
             printf("%s","PLUSOP\n");
             return PLUSOP;   
         }   
@@ -198,7 +193,6 @@ token scanner(void)
             c = getchar();   
             if( c == '=' ) 
             {
-                printf("%s <---> ",":=");
                 printf("%s","ASSIGNOP\n");
                 return ASSIGNOP;   
             } else 
@@ -217,7 +211,6 @@ token scanner(void)
             }   
             else {   
                 ungetc(c, stdin);
-                printf("%s <---> ","-");
                 printf("%s","MINUSOP\n");
                 return  MINUSOP;   
             }   

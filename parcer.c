@@ -140,6 +140,26 @@ void expression (void)
     } 
 }
 
+/*
+ * No se si va a ser necesario utilizarlo
+ * por el momento queda eliminado
+void expression (expr_rec *result)
+{
+    expr_rec left_operand, right_operand;
+    op_rec op;
+    
+    primary(& left_operand);
+    while(next_token() == PLUSOP ||
+          next_token() == MINUSOP)
+    {
+        add_op(& op);
+        primary(& right_operand);
+        left_operand = gen_infix(left_operand,op,right_operand);
+    }
+    *result = left_operand;
+}
+*/
+
 
 
 void expr_list(void)
@@ -252,7 +272,7 @@ void match(token pToken)
  
 void syntax_error(token pToken) 
 {   
-    fprintf(stderr, "Error sintactico en  %s  token : %d", token_buffer, pToken);   
+    fprintf(stderr, "Error sintactico en  %s  token : %s", token_buffer, getTokenText(pToken));   
     exit(4);   
 }
 

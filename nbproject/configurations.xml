@@ -8,6 +8,7 @@
       <itemPath>funcionesUtiles.h</itemPath>
       <itemPath>parser.h</itemPath>
       <itemPath>scanner.h</itemPath>
+      <itemPath>traductor.h</itemPath>
       <itemPath>variables.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -22,6 +23,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>parcer.c</itemPath>
       <itemPath>scanner.c</itemPath>
+      <itemPath>traductor.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -63,6 +65,10 @@
       </item>
       <item path="scanner.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="traductor.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="traductor.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="variables.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
@@ -103,6 +109,10 @@
       <item path="scanner.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="scanner.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="traductor.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="traductor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="variables.h" ex="false" tool="3" flavor2="0">
       </item>

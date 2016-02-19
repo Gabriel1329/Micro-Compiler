@@ -14,8 +14,7 @@
 extern "C" {
 #endif
 
-extern char* lowerCaseWord(char* a);
-extern int strcmpInsensitive(char* a, char* b);
+extern int prueba(char* buffer, char* token, int pLargo);
 
 
 #ifdef	__cplusplus
