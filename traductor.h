@@ -32,14 +32,15 @@ extern void gen_infix(char* e1, char* op, char* e2);
 extern void read_id();
 extern expr_rec process_id(void);
 extern expr_rec process_literal(void);
-extern void writer_expr(expr_rec out_expr);
+extern void writer_expr();
 extern void generate(char *op, char * A, char * B, char * C);
 extern void revisarAsignacion(char *s);
 extern void mostrarTabla(SymbolTable t);
 extern void operando(char* o);
 extern char* get_reg(char* s);
-void codigoOperacion(void);
-int verificarNumero(char* n);
+extern void codigoOperacion(void);
+extern int verificarNumero(char* n);
+extern void limpiarTabla(void);
 
 
     

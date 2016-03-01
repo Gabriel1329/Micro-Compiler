@@ -188,9 +188,17 @@ expr_rec process_literal(void)
 }
 
 
-void writer_expr(expr_rec out_expr)
-{
+void writer_expr()
+{   
+    acomodarOPtable();
+    mostrarTabla(opTable);
+    if(opTable.freepointer = 1){
+        generate("write",opTable.smb[0].registro,"1","");
+    }
+    limpiarTabla();
+    mostrarTabla(opTable);
  //   generate("Write",extract(out_expr),"Integer","");
+    
 }
 
 
@@ -206,6 +214,12 @@ void   generate(char *op, char * A, char * B, char * C)
     else if(comparacionCadenas(op,"add",3) == 0 || 
             comparacionCadenas(op,"sub",3) == 0){
         fprintf(stderr, "	%s %s, %s, %s\n", op, C, A, B);
+    }
+    
+    else if(comparacionCadenas(op,"write",5) == 0){
+        fprintf(stderr, "	li $v0, %s\n", B);
+        fprintf(stderr, "	add %s, $v0, $zero\n", A);
+        fprintf(stderr, "	syscall\n\n");
     }
    
 
@@ -245,6 +259,7 @@ void revisarAsignacion(char *s){
 void mostrarTabla(SymbolTable t){
     printf("Variable | Registro\n");
     int i;
+    printf("Freepointer: %d\n", t.freepointer);
     for(i = 0; i < t.freepointer; i++){
         printf("%s        | %s\n",t.smb[i].name, t.smb[i].registro);
     }
@@ -253,8 +268,8 @@ void mostrarTabla(SymbolTable t){
 
 // agrega a la tabla2 (la tabla de la operación), el operando correspondiente
 void operando(char* o){
-    if(o == PLUSOP && operacion == true){ enterOP("add");}
-    if(o == MINUSOP && operacion == true){ enterOP("sub");}
+    if(o == PLUSOP && expresion == true){ enterOP("add");}
+    if(o == MINUSOP && expresion == true){ enterOP("sub");}
 }
 
 
@@ -293,43 +308,44 @@ void codigoOperacion(void)
     opTable.smb[opTable.freepointer - 3].registro; //segundo operando
 */
     acomodarOPtable();
-    int i = 0;
-    while(opTable.freepointer >= 0){
-        if(verificarNumero(opTable.smb[opTable.freepointer - 1].name[0])){
-            fprintf(stderr, "	la %s, %s\n", opTable.smb[opTable.freepointer - 1].registro, 
-                    opTable.smb[opTable.freepointer - 1].name);
+    int i = 0, pos = opTable.freepointer;
+    while(pos >= 0){
+        if(verificarNumero(opTable.smb[pos - 1].name[0])){
+            fprintf(stderr, "	la %s, %s\n", opTable.smb[pos - 1].registro, 
+                    opTable.smb[pos - 1].name);
         }
-        if(verificarNumero(opTable.smb[opTable.freepointer - 2].name[0])){
-            fprintf(stderr, "	la %s, %s\n", opTable.smb[opTable.freepointer - 2].registro, 
-                    opTable.smb[opTable.freepointer - 2].name);
+        if(verificarNumero(opTable.smb[pos - 2].name[0])){
+            fprintf(stderr, "	la %s, %s\n", opTable.smb[pos - 2].registro, 
+                    opTable.smb[pos - 2].name);
         }
-        if(verificarNumero(opTable.smb[opTable.freepointer - 3].name[0])){
-            fprintf(stderr, "	la %s, %s\n", opTable.smb[opTable.freepointer - 3].registro, 
-                    opTable.smb[opTable.freepointer - 3].name);
+        if(verificarNumero(opTable.smb[pos - 3].name[0])){
+            fprintf(stderr, "	la %s, %s\n", opTable.smb[pos - 3].registro, 
+                    opTable.smb[pos - 3].name);
         }
         
-        if(opTable.freepointer == 2){
+        if(pos == 2){
            generate("add",opTable.smb[1].registro, "$zero",opTable.smb[0].registro); 
-           opTable.freepointer = -1;
+           pos = -1;
         }
-        else if(opTable.freepointer == 1){
+        else if(pos == 1){
             generate("add","$a3", "$zero",opTable.smb[0].registro);
-            opTable.freepointer = -1;
+            pos = -1;
         }
         else if(i == 0){
-            generate(opTable.smb[opTable.freepointer - 2].registro,
-                    opTable.smb[opTable.freepointer - 3].registro,
-                    opTable.smb[opTable.freepointer - 1].registro,
+            generate(opTable.smb[pos - 2].registro,
+                    opTable.smb[pos - 3].registro,
+                    opTable.smb[pos - 1].registro,
                     "$a3");
-            opTable.freepointer = opTable.freepointer - 3;
+            pos = pos - 3;
             i = 1;
         }else{
-            generate(opTable.smb[opTable.freepointer - 1].registro,
-                    opTable.smb[opTable.freepointer - 2].registro,
+            generate(opTable.smb[pos - 1].registro,
+                    opTable.smb[pos - 2].registro,
                     "$a3", "$a3");
-            opTable.freepointer = opTable.freepointer - 2;
+            pos = pos - 2;
         }
     }
+    fprintf(stderr, "\n");
 
 }
 
@@ -339,4 +355,8 @@ int verificarNumero(char* n){
         resultado = 1;
     }
     return resultado;
+}
+
+void limpiarTabla(void){ //hacer que esta sea para cualquier tabla
+    opTable.freepointer = 0;
 }

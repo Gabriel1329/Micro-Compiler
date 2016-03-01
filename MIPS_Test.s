@@ -42,4 +42,15 @@ sub $t1, $t1, $t0
 la $t0, 3
 add $t1, $t1, $t0
 
+a        | $t0
+b        | $t1
+
+c := 3+(a-(b-(4+a))); 
+
+la $s0, 100
+la $s1, 2
+add $s3, $t0, $t1
+la $s0, 3
+add $s3, $t0, $t3
+
 

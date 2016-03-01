@@ -39,10 +39,12 @@ int main(int argc, char** argv)
     //printf("identificador LEN: %d\n", strlen(identificador));
 
 
-    mostrarTabla(symbolTable);
     
-    //mostrarTabla(opTable);
-    
+    printf("tabla sin ser limpiada!!!\n");
+    mostrarTabla(opTable);
+    limpiarTabla(opTable);
+    printf("tabla limpia!!!\n");
+    mostrarTabla(opTable);
 /*
     int i = opTable.smb[1].name[0];
     printf("%d", '9');

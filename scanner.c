@@ -149,7 +149,7 @@ token scanner(void)
             }
             revisarAsignacion(token_buffer);
             
-            if(operacion){
+            if(expresion){
                 enterOP(identificador);
             }else{
                 check_id(identificador);
@@ -167,7 +167,7 @@ token scanner(void)
             }   
             ungetc(c, stdin);
             //printf("%s","INTLITERAL\n");
-             if(operacion)
+             if(expresion)
                  enterOP(token_buffer);
             
             return INTLITERAL;   

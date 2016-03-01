@@ -29,7 +29,7 @@ FILE *archivoSalida;
 int posTable;
 
 bool matched; 
-bool operacion;
+bool expresion;
 char *identificador[50];    
 
 

@@ -76,13 +76,14 @@ void statement(void)
             match(ASSIGNOP);
             enterOP(identificador);
             posTable = symbolTable.freepointer;
-            operacion = true;
+            expresion = true;
             expression();
             matched = false;
             match(SEMICOLON);
             symbolTable.freepointer = posTable;
-            operacion = false;
+            expresion = false;
             codigoOperacion();
+            limpiarTabla(opTable);
             break;
             
         case READ:
@@ -102,7 +103,11 @@ void statement(void)
             matched = false;
             match(WRITE); 
             match(LPAREN);
+            posTable = symbolTable.freepointer;
+            expresion = true;
             expr_list();
+            expresion = false;
+            symbolTable.freepointer = posTable;
             matched = false;
             match(RPAREN);
             match(SEMICOLON);
@@ -176,12 +181,15 @@ void expr_list(void)
 {
    /*  <expr list> ::= <expression> { , <expression>}*/
     expression();
-    
+    printf("WRITE!!!!!\n");
+    writer_expr();
     while (current_token == COMMA)
     {
         matched = false;
         match(COMMA);
         expression();
+        printf("WRITE!!!!!\n");
+        writer_expr();
     }
 }
 
