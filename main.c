@@ -40,11 +40,21 @@ int main(int argc, char** argv)
 
 
     
+/*
     printf("tabla sin ser limpiada!!!\n");
     mostrarTabla(opTable);
     limpiarTabla(opTable);
     printf("tabla limpia!!!\n");
     mostrarTabla(opTable);
+*/
+/*
+    if(verificarNumero('1')){
+        printf("es un num");
+    }else{
+        printf("no es un num");
+    }
+*/
+    
 /*
     int i = opTable.smb[1].name[0];
     printf("%d", '9');

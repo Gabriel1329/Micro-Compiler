@@ -82,7 +82,7 @@ void statement(void)
             match(SEMICOLON);
             symbolTable.freepointer = posTable;
             expresion = false;
-            codigoOperacion();
+            codigoOperacion("asignacion");
             limpiarTabla(opTable);
             break;
             
@@ -188,7 +188,6 @@ void expr_list(void)
         matched = false;
         match(COMMA);
         expression();
-        printf("WRITE!!!!!\n");
         writer_expr();
     }
 }

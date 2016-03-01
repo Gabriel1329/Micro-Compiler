@@ -38,8 +38,8 @@ extern void revisarAsignacion(char *s);
 extern void mostrarTabla(SymbolTable t);
 extern void operando(char* o);
 extern char* get_reg(char* s);
-extern void codigoOperacion(void);
-extern int verificarNumero(char* n);
+extern void codigoOperacion(char* instruccion);
+extern int verificarNumero(char n);
 extern void limpiarTabla(void);
 
 

@@ -192,11 +192,13 @@ void writer_expr()
 {   
     acomodarOPtable();
     mostrarTabla(opTable);
-    if(opTable.freepointer = 1){
+    if(opTable.freepointer == 1){
         generate("write",opTable.smb[0].registro,"1","");
+    }else{
+        codigoOperacion("write");
+        generate("write","$a3","1","");
     }
     limpiarTabla();
-    mostrarTabla(opTable);
  //   generate("Write",extract(out_expr),"Integer","");
     
 }
@@ -207,8 +209,8 @@ void   generate(char *op, char * A, char * B, char * C)
     if (comparacionCadenas(op,"read",4) == 0)
     {
         fprintf(stderr, "	li $v0, %s\n", B);
-        fprintf(stderr, "	add %s, $v0, $zero\n", A);
-        fprintf(stderr, "	syscall\n\n");
+        fprintf(stderr, "	syscall\n");
+        fprintf(stderr, "	add %s, $v0, $zero\n\n", A);
     }
     
     else if(comparacionCadenas(op,"add",3) == 0 || 
@@ -218,7 +220,7 @@ void   generate(char *op, char * A, char * B, char * C)
     
     else if(comparacionCadenas(op,"write",5) == 0){
         fprintf(stderr, "	li $v0, %s\n", B);
-        fprintf(stderr, "	add %s, $v0, $zero\n", A);
+        fprintf(stderr, "	add $a0, %s, $zero\n", A);
         fprintf(stderr, "	syscall\n\n");
     }
    
@@ -301,15 +303,21 @@ void acomodarOPtable(){
     }
 }
 
-void codigoOperacion(void)
+void codigoOperacion(char* instruccion)
 {/*
     opTable.smb[opTable.freepointer - 1].registro; //primer operando
     opTable.smb[opTable.freepointer - 2].registro; // operador
     opTable.smb[opTable.freepointer - 3].registro; //segundo operando
 */
     acomodarOPtable();
+    
     int i = 0, pos = opTable.freepointer;
     while(pos >= 0){
+        printf("");
+        printf("");
+        mostrarTabla(opTable);
+        printf("");
+        printf("");
         if(verificarNumero(opTable.smb[pos - 1].name[0])){
             fprintf(stderr, "	la %s, %s\n", opTable.smb[pos - 1].registro, 
                     opTable.smb[pos - 1].name);
@@ -324,8 +332,14 @@ void codigoOperacion(void)
         }
         
         if(pos == 2){
-           generate("add",opTable.smb[1].registro, "$zero",opTable.smb[0].registro); 
+            if(comparacionCadenas(instruccion, "asignacion", 10) == 0){
+                generate("add",opTable.smb[1].registro, "$zero",opTable.smb[0].registro); 
+            }
+            else if(comparacionCadenas(instruccion, "write", 5) == 0){
+                generate(opTable.smb[1].registro, opTable.smb[0].registro, "$a3", "$a3" );
+            }
            pos = -1;
+           
         }
         else if(pos == 1){
             generate("add","$a3", "$zero",opTable.smb[0].registro);
@@ -349,7 +363,7 @@ void codigoOperacion(void)
 
 }
 
-int verificarNumero(char* n){
+int verificarNumero(char n){
     int resultado = 0, i = n;
     if(i <= 57 && i >= 48){
         resultado = 1;
