@@ -4,10 +4,13 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <ctype.h>
 #include <stdbool.h>
 #include "parser.h"
-
+#include "traductor.h"
+#include "variables.h"
+#include <string.h>
 
 
 int main(int argc, char** argv) 
@@ -24,7 +27,7 @@ int main(int argc, char** argv)
     
     //archivoEntrada = freopen( direccionArchivo, "r", stdin );
     archivoEntrada = freopen( "Texto.txt", "r", stdin );
-    
+    archivoSalida = freopen( "ensambler.s", "w", stderr);
     if (!archivoEntrada)
     {
         printf( "El archivo no existe" );
@@ -32,9 +35,28 @@ int main(int argc, char** argv)
     }
     
     system_goal();
+    //printf("identificador: %s\n", identificador);
+    //printf("identificador LEN: %d\n", strlen(identificador));
+
+
+    mostrarTabla(symbolTable);
+    
+    //mostrarTabla(opTable);
+    
+/*
+    int i = opTable.smb[1].name[0];
+    printf("%d", '9');
+*/
+
     
 
+
 /*
+    if(1){
+        printf("1 = TRUE, 0 = FALSE");
+    }
+*/
+/*  
     while(current_token != SCANEOF)
     {
         next_token();

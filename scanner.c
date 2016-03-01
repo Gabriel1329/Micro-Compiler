@@ -1,6 +1,6 @@
 #include "scanner.h"
 #include <stdio.h>
-
+#include "traductor.h"
 
 
 void clear_buffer(void)
@@ -97,25 +97,25 @@ token check_reserved(void)
     //prueba(char* buffer, char* token, int pLargo)
     if(comparacionCadenas(temp, read, 4) == 0) 
     {
-        printf("%s","READ\n");
+        //printf("%s","READ\n");
         return READ;   
     }   
     else if(comparacionCadenas(temp, write, 5) == 0) 
     {   
-        printf("%s","WRITE\n");
+        //printf("%s","WRITE\n");
         return WRITE;   
     }   
     else if(comparacionCadenas(temp, begin, 5) == 0) 
     {   
-        printf("%s","BEGIN\n");
+        //printf("%s","BEGIN\n");
         return BEGIN;   
     }   
     else if(comparacionCadenas(temp, end, 3) == 0) 
     {   
-        printf("%s","END\n");
+        //printf("%s","END\n");
         return END;   
     } 
-    printf("%s","ID\n");
+    //printf("%s","ID\n");
     return ID;   
 } 
 
@@ -146,44 +146,55 @@ token scanner(void)
             buffer_char(in_char);   
             for( c = getchar(); isalnum(c) || c == '_'; c = getchar() ) {   
                 buffer_char(c);   
-            }   
+            }
+            revisarAsignacion(token_buffer);
+            
+            if(operacion){
+                enterOP(identificador);
+            }else{
+                check_id(identificador);
+            }
+            
             ungetc(c, stdin);   
             return  check_reserved();   
         }   
         else if( isdigit(in_char) ) 
-        {   
+        {  
           /*  INTLITERAL ::= DIGIT | INTLITERAL DIGIT  */   
             buffer_char(in_char);   
             for(c = getchar(); isdigit(c); c = getchar() ) {   
                 buffer_char(c);   
             }   
             ungetc(c, stdin);
-            printf("%s","INTLITERAL\n");
+            //printf("%s","INTLITERAL\n");
+             if(operacion)
+                 enterOP(token_buffer);
+            
             return INTLITERAL;   
         }   
         else if( in_char == '(' ) 
         {   
-            printf("%s","LPAREN\n");
+            //printf("%s","LPAREN\n");
             return LPAREN;   
         }   
         else if( in_char == ')' ) 
         {   
-            printf("%s","RPAREN\n");
+            //printf("%s","RPAREN\n");
             return RPAREN;   
         }   
         else if( in_char == ';' ) 
         {
-            printf("%s","SEMICOLON\n");
+            //printf("%s","SEMICOLON\n");
             return SEMICOLON;   
         }   
         else if( in_char == ',' ) 
         {
-            printf("%s","COMMA\n");
+            //printf("%s","COMMA\n");
             return COMMA;   
         }   
         else if( in_char == '+' ) 
         {
-            printf("%s","PLUSOP\n");
+            //printf("%s","PLUSOP\n");
             return PLUSOP;   
         }   
 
@@ -193,7 +204,7 @@ token scanner(void)
             c = getchar();   
             if( c == '=' ) 
             {
-                printf("%s","ASSIGNOP\n");
+                //printf("%s","ASSIGNOP\n");
                 return ASSIGNOP;   
             } else 
             {   
@@ -211,23 +222,24 @@ token scanner(void)
             }   
             else {   
                 ungetc(c, stdin);
-                printf("%s","MINUSOP\n");
+                //printf("%s","MINUSOP\n");
                 return  MINUSOP;   
             }   
-            printf("%s","COMENTARIO\n");
+            //printf("%s","COMENTARIO\n");
             //return LPAREN;   
         }   
         else  {    
             lexical_error(in_char);   
         }   
     }   
-    printf("%s","SCANEOF\n");
+    //printf("%s","SCANEOF\n");
     return SCANEOF;   
 } 
 
 token next_token()
 {
     current_token = scanner();
+    
     return current_token;
 }
 

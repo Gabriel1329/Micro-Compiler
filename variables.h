@@ -19,13 +19,18 @@ extern "C" {
 
 char token_buffer[];
 token current_token;
-
+Symbol symbol;
+SymbolTable symbolTable;
+SymbolTable opTable;
 
 FILE *archivoEntrada;
 FILE *archivoSalida;
 
+int posTable;
+
 bool matched; 
-    
+bool operacion;
+char *identificador[50];    
 
 
 #ifdef	__cplusplus

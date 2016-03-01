@@ -15,7 +15,8 @@ extern "C" {
 #endif
 
 extern int comparacionCadenas(char* buffer, char* token, int pLargo);
-
+extern void reverse(char s[]);
+extern void itoa(int n, char s[]);
 
 #ifdef	__cplusplus
 }

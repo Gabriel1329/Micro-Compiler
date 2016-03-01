@@ -8,6 +8,8 @@
 #ifndef ESTRUCTUTURAS_H
 #define	ESTRUCTUTURAS_H
 
+#include "variables.h"
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -48,6 +50,17 @@ typedef struct expression
 }expr_rec;
 
 
+typedef struct symbol { 
+	struct { 
+		char* name[10];// for ID  
+		char* registro[3];       // for INTLITERAL 
+	}; 
+} Symbol; 
+ 
+typedef struct symboltable { 
+	int     freepointer;     // point to the first free unit in the smb 
+	Symbol  smb[ 200 ]; // common.h 
+} SymbolTable;  
 
 
 

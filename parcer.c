@@ -1,5 +1,5 @@
 #include "parser.h"
-
+#include "variables.h"
 
 
 void system_goal(void)
@@ -16,7 +16,9 @@ void program(void)
   /*   <program> ::= BEGIN <statement list> END*/
     // Probando si con esto se corrige el error
     matched = true;
-    
+    fprintf(stderr, "        .text\n");
+    fprintf(stderr, "        .globl main\n");
+    fprintf(stderr, "main:\n");
     match(BEGIN);
     statement_list();
     match(END);
@@ -51,6 +53,7 @@ void statement_list(void)
                 return;
         }
     }
+    
 }
 
 
@@ -71,13 +74,18 @@ void statement(void)
             matched = false;
             match(ID); 
             match(ASSIGNOP);
+            enterOP(identificador);
+            posTable = symbolTable.freepointer;
+            operacion = true;
             expression();
             matched = false;
             match(SEMICOLON);
+            symbolTable.freepointer = posTable;
+            operacion = false;
+            codigoOperacion();
             break;
             
         case READ:
- 
             /* <statement> ::= READ (<id list>);*/
             matched = false;
             match(READ);
@@ -112,12 +120,14 @@ void id_list(void)
 {
     /*<id list> ::= ID { , ID}*/
     match(ID);
-    
+    read_id();
     while (next_token() == COMMA)
     {
+        
         matched = false;
         match(COMMA);
         match(ID);
+        read_id();
     }
 }
 
@@ -137,7 +147,7 @@ void expression (void)
     {
         add_op();
         primary();
-    } 
+    }
 }
 
 /*
@@ -183,6 +193,7 @@ void add_op(void)
     /* <addop> ::= PLUSOP | MINUSOP*/
     if(current_token == PLUSOP || current_token == MINUSOP)
     {
+        operando(current_token);
         matched = false;
         match(current_token);
     }
@@ -243,13 +254,15 @@ void match(token pToken)
     }   
     if( current_token != pToken ) 
     {   
+/*
         char  buffer[50];   
         if( pToken == ID || INTLITERAL == pToken )
             syntax_error(pToken);
-            //sprintf(buffer, "[ Unmatch ] expect:%d  cur-tok:%d  text:%s", pToken, current_token, token_buffer);   
+            sprintf(buffer, "[ Unmatch ] expect:%d  cur-tok:%d  text:%s", pToken, current_token, token_buffer);   
         else
             syntax_error(pToken);
-            //sprintf(buffer, "[ Unmatch ] expect:%d  cur-tok:%d", pToken, current_token);   
+            sprintf(buffer, "[ Unmatch ] expect:%d  cur-tok:%d", pToken, current_token);   
+*/
         //error(buffer);   
         exit(3);   
     }   
@@ -257,14 +270,16 @@ void match(token pToken)
     {   
         matched = true;
 
+/*
         if( ID == pToken || INTLITERAL == pToken ) 
         {   
-            fprintf(stderr, "match %d  %s %s\n", pToken, getTokenText(pToken), token_buffer);   
+            fprintf(stdout, "match %d  %s %s\n", pToken, getTokenText(pToken), token_buffer);   
         }   
         else
         {
-            fprintf(stderr, "match %d  %s\n", pToken, getTokenText(pToken));
+            fprintf(stdout, "match %d  %s\n", pToken, getTokenText(pToken));
         }
+*/
     }   
 } 
 
@@ -272,7 +287,7 @@ void match(token pToken)
  
 void syntax_error(token pToken) 
 {   
-    fprintf(stderr, "Error sintactico en  %s  token : %s", token_buffer, getTokenText(pToken));   
+    fprintf(stdout, "Error sintactico en  %s  token : %s", token_buffer, getTokenText(pToken));   
     exit(4);   
 }
 
