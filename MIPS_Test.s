@@ -12,10 +12,12 @@ main:   li $v0, 1       # syscall 1 (print_integer)
 write:
 	li $v0, 1       # syscall 1 (print a integer)
 	la $a0, 5       # argument: integer
+	syscall
 
 Read:
 	li $v0, 5	# syscall 5 (read a integer)
 			# integer leido queda en $v0
+	syscall
 	add $a0, $v0, $zero
 
 +:

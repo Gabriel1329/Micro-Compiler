@@ -101,7 +101,7 @@ void start(void)
 void finish(void)
 {
     /* Generate code to finish program.*/
-    generate("Halt","","","");
+    generate("finish","jr","$ra","");
 }
 
 
@@ -222,6 +222,9 @@ void   generate(char *op, char * A, char * B, char * C)
         fprintf(stderr, "	li $v0, %s\n", B);
         fprintf(stderr, "	add $a0, %s, $zero\n", A);
         fprintf(stderr, "	syscall\n\n");
+    }
+    else if(comparacionCadenas(op,"finish",6) == 0){
+        fprintf(stderr, "	%s %s", A, B);
     }
    
 

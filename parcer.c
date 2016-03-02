@@ -22,6 +22,7 @@ void program(void)
     match(BEGIN);
     statement_list();
     match(END);
+    finish();
 }
 
 

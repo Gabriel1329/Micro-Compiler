@@ -35,47 +35,10 @@ int main(int argc, char** argv)
     }
     
     system_goal();
-    //printf("identificador: %s\n", identificador);
-    //printf("identificador LEN: %d\n", strlen(identificador));
 
-
-    
-/*
-    printf("tabla sin ser limpiada!!!\n");
-    mostrarTabla(opTable);
-    limpiarTabla(opTable);
-    printf("tabla limpia!!!\n");
-    mostrarTabla(opTable);
-*/
-/*
-    if(verificarNumero('1')){
-        printf("es un num");
-    }else{
-        printf("no es un num");
-    }
-*/
-    
-/*
-    int i = opTable.smb[1].name[0];
-    printf("%d", '9');
-*/
-
-    
-
-
-/*
-    if(1){
-        printf("1 = TRUE, 0 = FALSE");
-    }
-*/
-/*  
-    while(current_token != SCANEOF)
-    {
-        next_token();
-    }
-*/
  
     fclose( archivoEntrada );
+    fclose( archivoSalida );
     
     return EXIT_SUCCESS;    
 }
