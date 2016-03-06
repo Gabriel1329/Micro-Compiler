@@ -195,11 +195,6 @@ void   generate(char *op, char * A, char * B, char * C)
     
     else if(comparacionCadenas(op,"add",3) == 0 || 
             comparacionCadenas(op,"sub",3) == 0){
-
-        if(verificarNumero(A[0]) || verificarNumero(B[0])){
-            strcpy(op,strcat(op,"i"));
-        }
-
         if(verificarNumero(A[0]) && verificarNumero(B[0])){
             fprintf(stderr, "	li $a2, %s\n", A);
             fprintf(stderr, "	%s %s, $a2, %s\n", op, C, B);
