@@ -2,12 +2,10 @@
 BEGIN
 
 cons c 2;
-cons d 4;
-cons e 3;
-cons t 5;
 
+c := 2;
 
-a := c + d;
+--a := c + d;
 --read (a,b);
 
 --write((a+12+b),(b+23));

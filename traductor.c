@@ -376,3 +376,9 @@ void generarCodigoNumeros(Symbol s)
 {
     if(verificarNumero(s.name[0])){fprintf(stderr, "	la %s, %s\n", s.registro, s.name);}
 }
+
+void restriccionConstante(char* nombre){
+    if(esConstante(nombre)){
+        printf("Error, no se puede reasignar la constante %s", nombre);
+    }
+}

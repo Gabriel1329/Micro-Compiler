@@ -78,6 +78,7 @@ void statement(void)
             matched = false;
             match(ID); 
             match(ASSIGNOP);
+            restriccionConstante(identificador);
             enterOP(identificador);
             posTable = symbolTable.freepointer;
             expresion = true;
