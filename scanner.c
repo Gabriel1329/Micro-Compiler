@@ -84,7 +84,8 @@ token check_reserved(void)
 {   
     // read  write  begin  end  function   
     char * read     = "read";   
-    char * write    = "write";   
+    char * write    = "write";
+    char * cons      = "cons";
     char * begin    = "begin";   
     char * end      = "end";
     char * temp     =  token_buffer;
@@ -114,6 +115,11 @@ token check_reserved(void)
     {   
         //printf("%s","END\n");
         return END;   
+    } 
+    else if(comparacionCadenas(temp, cons, 4) == 0) 
+    {   
+        //printf("%s","END\n");
+        return CONS;   
     } 
     //printf("%s","ID\n");
     return ID;   

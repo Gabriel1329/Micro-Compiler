@@ -255,7 +255,8 @@ void revisarAsignacion(char *s){
     if(comparacionCadenas(s,"begin",5) != 0 
        && comparacionCadenas(s,"read",4) != 0
        && comparacionCadenas(s,"write",5) != 0
-       && comparacionCadenas(s,"end",3) != 0){
+       && comparacionCadenas(s,"end",3) != 0
+       && comparacionCadenas(s,"cons",4) != 0){
         strcpy(identificador,s);
     }
 }
@@ -300,8 +301,13 @@ void acomodarOPtable(){
         else if(comparacionCadenas(opTable.smb[i].name, "add", 3) == 0
            || comparacionCadenas(opTable.smb[i].name, "sub", 3) == 0){
             strcpy(opTable.smb[i].registro, opTable.smb[i].name);
-        } else{
-            //printf("La variable %s no está definida", opTable.smb[i].name); //arrglar esto
+        }
+        else if(esConstante(opTable.smb[i].name)){
+            strcpy(opTable.smb[i].registro, get_reg(opTable.smb[i].name));
+        }
+        else if(!lookup(opTable.smb[i].name) && !verificarNumero(opTable.smb[i].name[0])){
+            printf("La variable %s no está definida\n", opTable.smb[i].name); //arrglar esto
+            exit(3); 
         }
     }
 }
@@ -376,4 +382,25 @@ int verificarNumero(char n){
 
 void limpiarTabla(void){ //hacer que esta sea para cualquier tabla
     opTable.freepointer = 0;
+}
+
+// cambia el registro de una entrada en la tabla de simbolos, por su valor de constante
+int cambiarPorConstante(char* cons, char* valor){
+    int i, resultado = 0;
+    
+    for(i = 0; i < symbolTable.freepointer; i++){
+        if(comparacionCadenas(symbolTable.smb[i].name, cons, strlen(cons)) == 0){
+            strcpy(symbolTable.smb[i].registro, valor);
+            resultado = 1;
+        }
+    }
+    return resultado;
+}
+
+int esConstante(char* nombre){
+    int resultado = 0;
+    if(verificarNumero(get_reg(nombre)[0])){
+        resultado = 1;
+    }
+    return resultado;
 }

@@ -50,6 +50,9 @@ void statement_list(void)
             case WRITE:
                 statement();
                 break;
+            case CONS:
+                statement();
+                break;
             default:
                 return;
         }
@@ -111,6 +114,17 @@ void statement(void)
             symbolTable.freepointer = posTable;
             matched = false;
             match(RPAREN);
+            match(SEMICOLON);
+            break;
+        
+        case CONS:
+            match(ID);
+            printf("identificador: %s\n", identificador);
+            match(INTLITERAL);
+            printf("current Token: %s\n", token_buffer);
+            mostrarTabla(symbolTable);
+            cambiarPorConstante(symbolTable, identificador, token_buffer);
+            mostrarTabla(symbolTable);
             match(SEMICOLON);
             break;
             
@@ -182,7 +196,6 @@ void expr_list(void)
 {
    /*  <expr list> ::= <expression> { , <expression>}*/
     expression();
-    printf("WRITE!!!!!\n");
     writer_expr();
     while (current_token == COMMA)
     {
@@ -309,7 +322,9 @@ char * getTokenText(token pToken) {
     case READ:   
         return "read";   
     case WRITE:   
-        return "write";   
+        return "write";  
+    case CONS:   
+        return "cons"; 
     case ID:   
         return "id";   
     case INTLITERAL:   

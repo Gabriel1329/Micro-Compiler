@@ -41,7 +41,8 @@ extern char* get_reg(char* s);
 extern void codigoOperacion(char* instruccion);
 extern int verificarNumero(char n);
 extern void limpiarTabla(void);
-
+extern int cambiarPorConstante(char* cons, char* valor);
+extern int esConstante(char* nombre);
 
     
 

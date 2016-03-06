@@ -1,6 +1,9 @@
 --Comentario de prueba
 BEGIN
 
+cons c 2;
+
+a := c + 1;
 --read (a,b);
 
 --write((a+12+b),(b+23));
@@ -8,8 +11,8 @@ BEGIN
 --write(a,b);
 --write((a+12+b));
 
-c := 3+(5-(2-(4+19))); 
-write(c);
+--c := 3+(5-(2-(4+19))); 
+--write(c);
 --a := b; 
 
 --read (c,t);
