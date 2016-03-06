@@ -33,8 +33,8 @@ void statement_list(void)
      *<statement list> ::= <statement>
      *                     { <statement>}   
      */
-    
     statement();
+    
     while (true)
     {
         next_token();
@@ -118,13 +118,10 @@ void statement(void)
             break;
         
         case CONS:
+            matched = true;
             match(ID);
-            printf("identificador: %s\n", identificador);
             match(INTLITERAL);
-            printf("current Token: %s\n", token_buffer);
-            mostrarTabla(symbolTable);
             cambiarPorConstante(symbolTable, identificador, token_buffer);
-            mostrarTabla(symbolTable);
             match(SEMICOLON);
             break;
             

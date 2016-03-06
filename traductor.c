@@ -53,16 +53,6 @@ void enterOP(char* variable)
 
 char* gen_reg(void)
 {
-   /* max temporary allocated so far*/
-/*
-    static int max_temp = 0;
-    static char tempname[MAXIDLEN]; //En realidad el tamaño es MAXIDLEN ;
-    
-    max_temp++;
-    sprintf(tempname,"Temp&%d",max_temp);
-    check_id(tempname);
-    return tempname;
-*/
     char *numRegistro[10];
     char *registro = (char *) malloc(sizeof(char) * 3);
     registro[0] = '$';
@@ -75,17 +65,7 @@ char* gen_reg(void)
         registro[1] = 's';
         itoa(symbolTable.freepointer - 10,numRegistro);
     }
-    
     registro[2] = numRegistro[0];
-
-/*
-    char *registro[10], *numRegistro[10];
-    strcpy(registro,"$t");
-    itoa(symbolTable.freepointer,numRegistro);
-    strcat(registro,numRegistro);
-*/
-    //printf("%s\n", registro);
-   // printf("%s\n", str);
     return registro;
     
 }
@@ -191,7 +171,7 @@ expr_rec process_literal(void)
 void writer_expr()
 {   
     acomodarOPtable();
-    mostrarTabla(opTable);
+    //mostrarTabla(opTable);
     if(opTable.freepointer == 1){
         generate("write",opTable.smb[0].registro,"1","");
     }else{
@@ -215,7 +195,20 @@ void   generate(char *op, char * A, char * B, char * C)
     
     else if(comparacionCadenas(op,"add",3) == 0 || 
             comparacionCadenas(op,"sub",3) == 0){
-        fprintf(stderr, "	%s %s, %s, %s\n", op, C, A, B);
+
+        if(verificarNumero(A[0]) || verificarNumero(B[0])){
+            strcpy(op,strcat(op,"i"));
+        }
+
+        if(verificarNumero(A[0]) && verificarNumero(B[0])){
+            fprintf(stderr, "	li $a2, %s\n", A);
+            fprintf(stderr, "	%s %s, $a2, %s\n", op, C, B);
+        }
+        else if(verificarNumero(A[0])){
+            fprintf(stderr, "	%s %s, %s, %s\n", op, C, B, A);
+        }else {
+            fprintf(stderr, "	%s %s, %s, %s\n", op, C, A, B);
+        }
     }
     
     else if(comparacionCadenas(op,"write",5) == 0){
@@ -226,29 +219,7 @@ void   generate(char *op, char * A, char * B, char * C)
     else if(comparacionCadenas(op,"finish",6) == 0){
         fprintf(stderr, "	%s %s", A, B);
     }
-   
 
-
-    
-/*
-    if(strlen(C) > 0) {   
-        printf("%s\t%s,\t%s,\t%s\n", op, A, B, C);   
-        if( archivoSalida )   
-            fprintf(stderr, "[ Gen ] %s\t%s,\t%s,\t%s\n", op, A, B, C);   
-    }   
-    else {   
-        if( strlen(B) > 0) {   
-            printf("%s\t%s,\t%s\n", op, A, B);   
-            if( archivoSalida )   
-                fprintf(stderr, "[ Gen ] %s\t%s,\t%s\n", op, A, B);   
-        }   
-        else {   
-            printf("%s\t%s\n", op, A);   
-            if( archivoSalida )   
-                fprintf(stderr, "[ Gen ] %s\n", op, A, B);   
-        }   
-    }   
-*/
 }   
 
 void revisarAsignacion(char *s){
@@ -273,13 +244,15 @@ void mostrarTabla(SymbolTable t){
 
 
 // agrega a la tabla2 (la tabla de la operación), el operando correspondiente
-void operando(char* o){
+void operando(char* o)
+{
     if(o == PLUSOP && expresion == true){ enterOP("add");}
     if(o == MINUSOP && expresion == true){ enterOP("sub");}
 }
 
 
-char* get_reg(char* s){
+char* get_reg(char* s)
+{
     char* registro[10];
     int i;
     for(i = 0; i < symbolTable.freepointer; i++){
@@ -291,7 +264,8 @@ char* get_reg(char* s){
     return registro;
 }
 
-void acomodarOPtable(){
+void acomodarOPtable()
+{
     int i;
     
     for(i = 0; i < opTable.freepointer; i++){
@@ -322,23 +296,15 @@ void codigoOperacion(char* instruccion)
     
     int i = 0, pos = opTable.freepointer;
     while(pos >= 0){
+/*
         printf("");
         printf("");
         mostrarTabla(opTable);
         printf("");
         printf("");
-        if(verificarNumero(opTable.smb[pos - 1].name[0])){
-            fprintf(stderr, "	la %s, %s\n", opTable.smb[pos - 1].registro, 
-                    opTable.smb[pos - 1].name);
-        }
-        if(verificarNumero(opTable.smb[pos - 2].name[0])){
-            fprintf(stderr, "	la %s, %s\n", opTable.smb[pos - 2].registro, 
-                    opTable.smb[pos - 2].name);
-        }
-        if(verificarNumero(opTable.smb[pos - 3].name[0])){
-            fprintf(stderr, "	la %s, %s\n", opTable.smb[pos - 3].registro, 
-                    opTable.smb[pos - 3].name);
-        }
+        
+*/
+        agregarNumeros(opTable.smb[pos - 1], opTable.smb[pos - 2], opTable.smb[pos - 3]);
         
         if(pos == 2){
             if(comparacionCadenas(instruccion, "asignacion", 10) == 0){
@@ -372,20 +338,18 @@ void codigoOperacion(char* instruccion)
 
 }
 
-int verificarNumero(char n){
+int verificarNumero(char n)
+{
     int resultado = 0, i = n;
-    if(i <= 57 && i >= 48){
-        resultado = 1;
-    }
+    if(i <= 57 && i >= 48){ resultado = 1; }
     return resultado;
 }
 
-void limpiarTabla(void){ //hacer que esta sea para cualquier tabla
-    opTable.freepointer = 0;
-}
+void limpiarTabla(void){ opTable.freepointer = 0;}
 
 // cambia el registro de una entrada en la tabla de simbolos, por su valor de constante
-int cambiarPorConstante(char* cons, char* valor){
+int cambiarPorConstante(char* cons, char* valor)
+{
     int i, resultado = 0;
     
     for(i = 0; i < symbolTable.freepointer; i++){
@@ -397,10 +361,23 @@ int cambiarPorConstante(char* cons, char* valor){
     return resultado;
 }
 
-int esConstante(char* nombre){
+int esConstante(char* nombre)
+{
     int resultado = 0;
     if(verificarNumero(get_reg(nombre)[0])){
         resultado = 1;
     }
     return resultado;
+}
+
+void agregarNumeros(Symbol A, Symbol B, Symbol C)
+{
+    generarCodigoNumeros(A);
+    generarCodigoNumeros(B);
+    generarCodigoNumeros(C);
+}
+
+void generarCodigoNumeros(Symbol s)
+{
+    if(verificarNumero(s.name[0])){fprintf(stderr, "	la %s, %s\n", s.registro, s.name);}
 }

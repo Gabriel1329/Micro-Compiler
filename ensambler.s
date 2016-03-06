@@ -1,8 +1,8 @@
         .text
         .globl main
 main:
-	la $t5, 1
-	add $a3, 2, $t5
-	add $t1, $a3, $zero
+	li $a2, 2
+	addi $a3, $a2, 4
+	add $t4, $a3, $zero
 
 	jr $ra

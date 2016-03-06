@@ -43,8 +43,8 @@ extern int verificarNumero(char n);
 extern void limpiarTabla(void);
 extern int cambiarPorConstante(char* cons, char* valor);
 extern int esConstante(char* nombre);
-
-    
+extern void agregarNumeros(Symbol A, Symbol B, Symbol C);
+extern void generarCodigoNumeros(Symbol s);
 
 
 
