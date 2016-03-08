@@ -1,0 +1,11 @@
+--Comentario de prueba
+BEGIN
+
+
+
+read (a,b);
+
+write((a+12+b),(b+r));
+
+
+END

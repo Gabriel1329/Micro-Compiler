@@ -1,0 +1,10 @@
+
+
+cons c 2;
+
+read (a,b);
+
+a := c + d;
+
+
+END

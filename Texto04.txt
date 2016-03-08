@@ -1,0 +1,9 @@
+--Comentario de prueba
+BEGIN
+
+cons c 2;
+
+c := 2;
+
+
+END

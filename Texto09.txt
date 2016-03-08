@@ -1,18 +1,17 @@
 --Comentario de prueba
-BEGIN
-
+begin
 cons c 2;
 
-c := 2;
-
+--c := 2;
 --a := c + d;
---read (a,b);
+
+read (a,b);
 
 --write((a+12+b),(b+23));
 
---write(a,b);
---write((a+12+b));
+write(a,b);
 
+--write((a+12+b));
 --c := 3+(5-(2-(4+19))); 
 --write(c);
 --a := b; 

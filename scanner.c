@@ -1,6 +1,7 @@
 #include "scanner.h"
 #include <stdio.h>
 #include "traductor.h"
+#include "variables.h"
 
 
 void clear_buffer(void)
@@ -17,68 +18,6 @@ void buffer_char(int c)
 {   
     token_buffer[strlen(token_buffer)] = c;
 }
-
-/*
-token check_reserved(void){   
-    // read  write  begin  end  function   
-    char * read     = "Read";   
-    char * write    = "Write";   
-    char * begin    = "Begin";   
-    char * end      = "End"; 
-    
-    //printf("%s",token_buffer);
-    if( token_buffer[0] == 'R' ) {   
-        if( strlen(token_buffer) != strlen(read) ) 
-        {
-            printf("%s","ID\n");
-            return ID;   
-        }   
-        if( strncmp(read, token_buffer, strlen(read) ) == 0 ) 
-        {
-            printf("%s","READ\n");
-            return READ;   
-        }   
-    }   
-    else if( token_buffer[0] == 'W' ) {   
-        if( strlen(token_buffer) != strlen(write) ) 
-        {   
-            printf("%s","ID\n");
-            return ID;   
-        }   
-        if( strncmp(write, token_buffer, strlen(write) ) == 0 ) 
-        {
-            printf("%s","WRITE\n");
-            return WRITE;   
-        }   
-    }   
-    else if( token_buffer[0] == 'B' ) {   
-        if( strlen(token_buffer) != strlen(begin) ) 
-        {
-            printf("%s","ID\n");
-            return ID;   
-        }   
-        if( strncmp(begin, token_buffer, strlen(begin)) == 0 ) 
-        {
-            printf("%s","BEGIN\n");
-            return BEGIN;   
-        }   
-    }   
-    else if( token_buffer[0] == 'E' ) {   
-        if( strlen(token_buffer) != strlen(end) ) 
-        {
-            printf("%s","ID\n");
-            return ID;   
-        }   
-        if( strncmp(end, token_buffer, strlen(end) ) == 0 ) 
-        {
-            printf("%s","END\n");
-            return END;   
-        }   
-    } 
-    printf("%s","ID\n");
-    return ID;   
-} 
-*/
 
 token check_reserved(void)
 {   
@@ -145,7 +84,10 @@ token scanner(void)
     { 
         if( isspace(in_char) ) {   
             continue; /*do nothing */  
-        }   
+        }
+        else if(in_char=='\n'){
+            printf("SOY UN SALTO DE LINEA");
+        }
         else if( isalpha(in_char) ) 
         {   
             /*  ID ::= LETTER | ID LETTER | ID DIGIT | ID UNDERSCORE  */   
@@ -243,7 +185,7 @@ token scanner(void)
 } 
 
 token next_token()
-{
+{   
     current_token = scanner();
     
     return current_token;

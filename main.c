@@ -26,7 +26,7 @@ int main(int argc, char** argv)
     
     
     //archivoEntrada = freopen( direccionArchivo, "r", stdin );
-    archivoEntrada = freopen( "Texto.txt", "r", stdin );
+    archivoEntrada = freopen( "Texto12.txt", "r", stdin );
     archivoSalida = freopen( "ensambler.s", "w", stderr);
     if (!archivoEntrada)
     {
@@ -35,8 +35,7 @@ int main(int argc, char** argv)
     }
     
     system_goal();
-
- 
+    
     fclose( archivoEntrada );
     fclose( archivoSalida );
     

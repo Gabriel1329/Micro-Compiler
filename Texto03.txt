@@ -1,0 +1,15 @@
+--Comentario de prueba
+BEGIN
+
+read (c,t);
+
+read (a,b);
+
+write(a,c);
+
+write((a+t+b), 2);
+
+a := b; 
+
+
+END

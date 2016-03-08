@@ -7,9 +7,8 @@ void system_goal(void)
   /* <system goal> ::= <program> SCANEOF */ 
     program();
     match(SCANEOF);
+    finish();
 }
-
-
 
 void program(void)
 {
@@ -22,10 +21,7 @@ void program(void)
     match(BEGIN);
     statement_list();
     match(END);
-    finish();
 }
-
-
 
 void statement_list(void)
 {
@@ -60,11 +56,8 @@ void statement_list(void)
     
 }
 
-
-
-
 void statement(void)
-{
+{   
     if (matched)
     {
         next_token();
@@ -133,7 +126,6 @@ void statement(void)
     }
 }
  
-
 void id_list(void)
 {
     /*<id list> ::= ID { , ID}*/
@@ -148,8 +140,6 @@ void id_list(void)
         read_id();
     }
 }
-
-
 
 
 void expression (void)
@@ -168,28 +158,6 @@ void expression (void)
     }
 }
 
-/*
- * No se si va a ser necesario utilizarlo
- * por el momento queda eliminado
-void expression (expr_rec *result)
-{
-    expr_rec left_operand, right_operand;
-    op_rec op;
-    
-    primary(& left_operand);
-    while(next_token() == PLUSOP ||
-          next_token() == MINUSOP)
-    {
-        add_op(& op);
-        primary(& right_operand);
-        left_operand = gen_infix(left_operand,op,right_operand);
-    }
-    *result = left_operand;
-}
-*/
-
-
-
 void expr_list(void)
 {
    /*  <expr list> ::= <expression> { , <expression>}*/
@@ -204,8 +172,6 @@ void expr_list(void)
     }
 }
 
-
-
 void add_op(void)
 {
     //token tok = next_token();
@@ -219,8 +185,6 @@ void add_op(void)
     else
         syntax_error(current_token);
 }
-
-
 
 void primary(void)
 {
@@ -260,11 +224,6 @@ void primary(void)
     }
 }
 
-
-
-
-
-
 void match(token pToken) 
 {   
     if( matched ) 
@@ -273,32 +232,11 @@ void match(token pToken)
     }   
     if( current_token != pToken ) 
     {   
-/*
-        char  buffer[50];   
-        if( pToken == ID || INTLITERAL == pToken )
-            syntax_error(pToken);
-            sprintf(buffer, "[ Unmatch ] expect:%d  cur-tok:%d  text:%s", pToken, current_token, token_buffer);   
-        else
-            syntax_error(pToken);
-            sprintf(buffer, "[ Unmatch ] expect:%d  cur-tok:%d", pToken, current_token);   
-*/
-        //error(buffer);   
-        exit(3);   
+        syntax_error(pToken);   
     }   
     if( DEBUG ) 
     {   
         matched = true;
-
-/*
-        if( ID == pToken || INTLITERAL == pToken ) 
-        {   
-            fprintf(stdout, "match %d  %s %s\n", pToken, getTokenText(pToken), token_buffer);   
-        }   
-        else
-        {
-            fprintf(stdout, "match %d  %s\n", pToken, getTokenText(pToken));
-        }
-*/
     }   
 } 
 
@@ -306,7 +244,7 @@ void match(token pToken)
  
 void syntax_error(token pToken) 
 {   
-    fprintf(stdout, "Error sintactico en  %s  token : %s", token_buffer, getTokenText(pToken));   
+    fprintf(stdout, "Error sintactico en  %s  token. Token esperado %s", token_buffer, getTokenText(pToken));   
     exit(4);   
 }
 

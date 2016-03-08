@@ -106,33 +106,7 @@ op_rec process_op(void)
 
 
 void gen_infix(char* e1,char* op, char* e2)
-{
-    generate(op, e2, e1, "$a3");
-    //expr_rec e_rec;
-    /* An expr_rec with temp variant set.*/
-    
-    //e_rec.kind = TEMPEXPR;
-    /*
-     * Generate code for infix operatin.
-     * Get result temp and set up semantic record  
-     * for result
-     */
-    //strcpy(e_rec.name, gen_reg());
-
- //   generate(extract(op),extract(e1),extract(e2),e_rec.name);
-
-}
-
-
-
- 
-/*
-void read_id(expr_rec in_var)
-{
-    Generate code for read.
-    generate("READ",in_var.name,"INTEGER","");
-}
-*/
+{generate(op, e2, e1, "$a3");}
 
 void read_id()
 {
@@ -237,7 +211,6 @@ void mostrarTabla(SymbolTable t){
     }
 }
 
-
 // agrega a la tabla2 (la tabla de la operación), el operando correspondiente
 void operando(char* o)
 {
@@ -291,14 +264,6 @@ void codigoOperacion(char* instruccion)
     
     int i = 0, pos = opTable.freepointer;
     while(pos >= 0){
-/*
-        printf("");
-        printf("");
-        mostrarTabla(opTable);
-        printf("");
-        printf("");
-        
-*/
         agregarNumeros(opTable.smb[pos - 1], opTable.smb[pos - 2], opTable.smb[pos - 3]);
         
         if(pos == 2){
@@ -380,5 +345,6 @@ void generarCodigoNumeros(Symbol s)
 void restriccionConstante(char* nombre){
     if(esConstante(nombre)){
         printf("Error, no se puede reasignar la constante %s", nombre);
+        exit(3);
     }
 }
